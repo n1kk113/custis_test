@@ -5,13 +5,13 @@ plugins {
 
 allure {
     report {
-        version.set("2.26.0")
+        version.set("2.19.0")
     }
     adapter {
         aspectjWeaver.set(true)
         frameworks {
             junit5 {
-                adapterVersion.set("2.26.0")
+                adapterVersion.set("2.19.0")
             }
         }
     }
@@ -25,7 +25,7 @@ dependencies {
     testImplementation(
             "com.codeborne:selenide:7.2.2",
             "org.junit.jupiter:junit-jupiter:5.10.2",
-            'io.qameta.allure:allure-selenide:2.26.0'
+            'io.qameta.allure:allure-selenide:2.19.0'
     )
 }
 

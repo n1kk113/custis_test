@@ -1,15 +1,15 @@
 package tests;
 
-import io.qameta.allure.Owner;
-import io.qameta.allure.Severity;
-import io.qameta.allure.SeverityLevel;
+import io.qameta.allure.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import page.CalculatorPage;
+
 import static io.qameta.allure.Allure.step;
 
 
 public class CalculatorTest extends TestBase {
+
     @Test
     @Owner("Denis Nikitin")
     @Severity(SeverityLevel.NORMAL)
@@ -35,6 +35,7 @@ public class CalculatorTest extends TestBase {
                 calculatorPage.verifyResult("4");
         });
     }
+
     @Test
     @Owner("Denis Nikitin")
     @Severity(SeverityLevel.NORMAL)
@@ -60,6 +61,7 @@ public class CalculatorTest extends TestBase {
             calculatorPage.verifyResult("Infinity");
         });
     }
+
     @Test
     @Owner("Denis Nikitin")
     @Severity(SeverityLevel.NORMAL)
