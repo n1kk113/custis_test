@@ -1,40 +1,40 @@
-name: Publish Allure Report
+name: Тестирование и публикация отчета Allure
 
-on:
-  push:
-    branches:
-      - main
+on: workflow_dispatch
 
 jobs:
-  publish-allure-report:
+  test:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v2
-
-      - name: Set up JDK 18 with Corretto
-        uses: actions/setup-java@v3
+      - uses: actions/checkout@v3
+      - uses: actions/setup-java@v3
         with:
           distribution: 'corretto'
           java-version: '18'
-
-      - name: Build and Run Tests
-        run: |
-          chmod +x gradlew
-          ./gradlew clean test -Dselenide.remote=http://localhost:4444/wd/hub
-
-      - name: Generate Allure Report
-        uses: simple-elf/allure-report-action@master
+      
+      - uses: Xotabu4/selenoid-github-action@v2
+      
+      - run: ./gradlew clean test -Dselenide.remote=http://localhost:4444/wd/hub
+      
+      - uses: actions/checkout@v2
+        if: always()
+        continue-on-error: true
+        with:
+          ref: gh-pages
+          path: gh-pages
+      
+      - uses: simple-elf/allure-report-action@master
+        if: always()
         with:
           gh_pages: gh-pages
           allure_results: build/allure-results
           allure_report: allure-report
           allure_history: allure-history
-
-      - name: Publish to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v2
-        with:
-          personal_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_branch: gh-pages
-          publish_dir: allure-history
+      
+      - uses: peaceiris/actions-gh-pages@v2
+        if: always()
+        env:
+          PERSONAL_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PUBLISH_BRANCH: gh-pages
+          PUBLISH_DIR: allure-history
