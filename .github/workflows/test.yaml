@@ -18,8 +18,7 @@ jobs:
           distribution: 'corretto'
           java-version: '18'
       - name: Build and Run Tests
-        run: |
-          ./gradlew clean test -Dselenide.remote=http://localhost:4444/wd/hub
+        run: ./gradlew clean test -Dselenide.remote=http://localhost:4444/wd/hub
       - name: Generate Allure Report
         uses: simple-elf/allure-report-action@master
         with:
