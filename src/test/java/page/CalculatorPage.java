@@ -23,6 +23,7 @@ public class CalculatorPage {
     private final SelenideElement subtractionButton = $x("//div[@aria-label='вычитание']");
     private final SelenideElement multiplicationButton = $x("//div[@aria-label='умножение']");
     private final SelenideElement divisionButton = $x("//div[@aria-label='деление']");
+    private final SelenideElement commaButton = $x("//div[@aria-label='запятая']");
 
     public CalculatorPage openCalculator() {
         open("search?q=calculator");
@@ -106,6 +107,11 @@ public class CalculatorPage {
 
     public CalculatorPage clickDivisionButton() {
         divisionButton.click();
+        return this;
+    }
+
+    public CalculatorPage clickCommaButton() {
+        commaButton.click();
         return this;
     }
 }
